@@ -1,0 +1,45 @@
+.header {
+	z-index: 9999;
+	background: #ffffff;
+	border-bottom: 1px solid rgb(228, 228, 228);
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	
+	& .container {
+		max-width: 1250px;
+		width: 100%;
+		padding: 0 15px;
+		margin: 0 auto;
+	}
+
+	&__nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1.5rem 0;
+
+		&_list {
+			display: flex;
+			align-items: center;
+			text-align: center;
+			gap: 0.2rem;
+
+			&_link {
+				display: block;
+				padding: 0.5rem 1.2rem;
+				min-width: 124px;
+				color: #000;
+				transition: 0.3s all ease-in-out;
+				border-radius: 25px;
+				font-size: clamp(1rem, 2.5vw, 1.5rem);
+
+				&:hover {
+					background: #333;
+					color: #fff;
+				}
+			}
+		}
+	}
+}
