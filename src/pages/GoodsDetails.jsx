@@ -6,7 +6,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import { A11y, EffectCoverflow, EffectCube, Navigation, Pagination } from 'swiper/modules'
+import { A11y, EffectCoverflow, Navigation, Pagination } from 'swiper/modules'
 
 const GoodsDetails = () => {
 	const { id } = useParams()
@@ -34,12 +34,11 @@ const GoodsDetails = () => {
 		<div className='goods__details'>
 			<div className='container'>
 				<Swiper
-					modules={[Navigation, Pagination, A11y, EffectCoverflow]}
+					modules={[Navigation, A11y, EffectCoverflow]}
 					spaceBetween={50}
 					slidesPerView={1}
 					navigation
-					pagination={{ clickable: true }}
-					effect="coverflow"
+					effect='coverflow'
 					coverflowEffect={{
 						rotate: 50,
 						stretch: 0,
@@ -49,25 +48,25 @@ const GoodsDetails = () => {
 					}}
 					className='swiper'
 				>
-					<SwiperSlide>
+					<SwiperSlide className='swiper_slide'>
 						<img
 							className='swiper_img'
 							src={goodsItem.images[0]}
-							alt={goods.title}
+							alt={goods.title || 'Opps...'}
 						/>
 					</SwiperSlide>
-					<SwiperSlide>
+					<SwiperSlide className='swiper_slide'>
 						<img
 							className='swiper_img'
 							src={goodsItem.images[1]}
-							alt={goods.title}
+							alt={goods.title || 'Opps...'}
 						/>
 					</SwiperSlide>
-					<SwiperSlide>
+					<SwiperSlide className='swiper_slide'>
 						<img
 							className='swiper_img'
 							src={goodsItem.images[2]}
-							alt={goods.title}
+							alt={goods.title || 'Opps...'}
 						/>
 					</SwiperSlide>
 				</Swiper>
