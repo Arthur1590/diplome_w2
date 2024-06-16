@@ -33,7 +33,7 @@ const GoodsDetails = () => {
 	return (
 		<div className='goods__details'>
 			<div className='container'>
-				<Swiper
+			<Swiper
 					modules={[Navigation, A11y, EffectCoverflow]}
 					spaceBetween={50}
 					slidesPerView={1}
@@ -52,21 +52,21 @@ const GoodsDetails = () => {
 						<img
 							className='swiper_img'
 							src={goodsItem.images[0]}
-							alt={goods.title || 'Opps...'}
+							alt={goods.title || 'Image is not available...'}
 						/>
 					</SwiperSlide>
 					<SwiperSlide className='swiper_slide'>
 						<img
 							className='swiper_img'
 							src={goodsItem.images[1]}
-							alt={goods.title || 'Opps...'}
+							alt={goods.title || 'Image is not available...'}
 						/>
 					</SwiperSlide>
 					<SwiperSlide className='swiper_slide'>
 						<img
 							className='swiper_img'
 							src={goodsItem.images[2]}
-							alt={goods.title || 'Opps...'}
+							alt={goods.title || 'Image is not available...'}
 						/>
 					</SwiperSlide>
 				</Swiper>

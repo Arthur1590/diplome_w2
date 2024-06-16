@@ -25,6 +25,7 @@ interface IGoodsItems {
 	reviews: IGoodsComments[]
 }
 interface IGoods {
+	originalGoods: IGoodsItems[]
 	goods: IGoodsItems[]
 	categories: Icategories[]
 	loading: boolean
@@ -35,9 +36,11 @@ interface IGoods {
 	setCurrentPage: (page: any) => void
 	getGoods: () => Promise<void>
 	sortbyPrice: (ascending: boolean) => void
-	sortbyRate?: (ascending: boolean) => void
+	sortbyRate: (ascending: boolean) => void
+	filterByCategory: (category: string) => void
 }
 export const useStore = create<IGoods>((set, get) => ({
+	originalGoods: [],
 	goods: [],
 	categories: [],
 	loading: false,
@@ -47,9 +50,15 @@ export const useStore = create<IGoods>((set, get) => ({
 	getGoods: async () => {
 		set({ loading: true, error: null })
 		try {
-			const res = await fetch('https://dummyjson.com/products?limit=100')
+			const res = await fetch('https://dummyjson.com/products?limit=200')
 			const data = await res.json()
-			set({ goods: data.products, loading: false })
+			set({
+				originalGoods: data.products,
+				goods: data.products,
+				loading: false,
+			})
+			const categories = [...new Set(data.products.map((item: any) => item.category))];
+      console.log('Полученные категории:', categories);
 		} catch (error: any) {
 			set({ error: error.message, loading: false })
 		}
@@ -80,5 +89,13 @@ export const useStore = create<IGoods>((set, get) => ({
 				.sort((a, b) =>
 					ascending ? a.rating - b.rating : b.rating - a.rating
 				),
+		})),
+	filterByCategory: category =>
+		set(state => ({
+			goods: state.originalGoods.filter(item => item.category === category),
+		})),
+	resetFilter: () =>
+		set(state => ({
+			goods: state.originalGoods,
 		})),
 }))
