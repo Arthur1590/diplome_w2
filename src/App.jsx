@@ -7,7 +7,7 @@ import GoodsDetails from './pages/GoodsDetails'
 
 function App() {
 	const location = useLocation()
-	
+
 	return (
 		<div className='App'>
 			<Nav />

@@ -14,6 +14,7 @@ interface IGoodsItems {
 	title: string
 	id: number
 	description: string
+	images: string
 	thumbnail: string
 	price: number
 	rating: number
@@ -27,8 +28,11 @@ interface IGoods {
 	goods: IGoodsItems[]
 	categories: Icategories[]
 	loading: boolean
-	getGoodById: (id: number) => Promise<IGoodsItems | undefined>
 	error: null | string
+	currentPage: number
+	goodsPerPage: number
+	getGoodById: (id: number) => Promise<IGoodsItems | undefined>
+	setCurrentPage: (page: any) => void
 	getGoods: () => Promise<void>
 	sortbyPrice: (ascending: boolean) => void
 	sortbyRate?: (ascending: boolean) => void
@@ -38,16 +42,19 @@ export const useStore = create<IGoods>((set, get) => ({
 	categories: [],
 	loading: false,
 	error: null,
+	currentPage: 1,
+	goodsPerPage: 12,
 	getGoods: async () => {
 		set({ loading: true, error: null })
 		try {
-			const res = await fetch('https://dummyjson.com/products?limit=12')
+			const res = await fetch('https://dummyjson.com/products?limit=100')
 			const data = await res.json()
 			set({ goods: data.products, loading: false })
 		} catch (error: any) {
 			set({ error: error.message, loading: false })
 		}
 	},
+	setCurrentPage: page => set({ currentPage: page }),
 	getGoodById: async id => {
 		set({ loading: true, error: null })
 		try {

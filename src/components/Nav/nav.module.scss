@@ -6,6 +6,8 @@
 	right: 0;
 	left: 0;
 	top: 0;
+	overflow: hidden;
+		overflow-x: scroll;
 	
 	& .container {
 		max-width: 1250px;
@@ -20,6 +22,11 @@
 		justify-content: space-between;
 		padding: 1.5rem 0;
 
+		h1 {
+			font-size: clamp(1rem, 1.5vw, 2rem);
+		}
+		
+
 		&_list {
 			display: flex;
 			align-items: center;
@@ -33,7 +40,7 @@
 				color: #000;
 				transition: 0.3s all ease-in-out;
 				border-radius: 25px;
-				font-size: clamp(1rem, 2.5vw, 1.5rem);
+				font-size: clamp(1rem, 1.5vw, 2.5rem);
 
 				&:hover {
 					background: #333;

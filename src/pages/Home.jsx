@@ -1,12 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SectionTitle from '../components/SecTitle/SectionTitle'
 import { useStore } from '../store/useStore'
 import s from './pages.module.scss'
 import { Link } from 'react-router-dom'
+import Pagination from '../components/Pagination/Pagination'
 
 const Home = () => {
-	const { getGoods, sortbyPrice, sortbyRate, goods, loading, error } =
-		useStore()
+	const {
+		getGoods,
+		sortbyPrice,
+		sortbyRate,
+		setCurrentPage,
+		currentPage,
+		goodsPerPage,
+		goods,
+		loading,
+		error,
+	} = useStore()
+	const indexOfLastGood = currentPage * goodsPerPage
+	const indexOfFirstGood = indexOfLastGood - goodsPerPage
+	const currentGoods = goods.slice(indexOfFirstGood, indexOfLastGood)
+
+	// Общее количество страниц
+	const totalPages = Math.ceil(goods.length / goodsPerPage)
 
 	useEffect(() => {
 		getGoods()
@@ -33,8 +49,8 @@ const Home = () => {
 						</div>
 					</div>
 					<div className={s.goods__list}>
-						{goods &&
-							goods.map(item => (
+						{currentGoods &&
+							currentGoods.map(item => (
 								<div key={item.id} className={s.goods__list_card}>
 									<span className={s.goods__list_card_stock}>
 										Stock: {item.stock}
@@ -66,7 +82,13 @@ const Home = () => {
 							))}
 					</div>
 				</div>
+				
 			</div>
+			<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onPageChange={page => setCurrentPage(page)}
+				/>
 		</div>
 	)
 }
