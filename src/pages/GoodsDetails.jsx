@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useStore } from '../store/useStore'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -77,6 +77,7 @@ const GoodsDetails = () => {
 					</h1>
 					<p>{goodsItem.description}</p>
 					<button>Add to Cart</button>
+					<Link to={'/'}>Get Back</Link>
 				</article>
 			</div>
 		</div>

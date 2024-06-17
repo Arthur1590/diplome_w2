@@ -10,6 +10,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import { A11y, EffectCoverflow, Navigation } from 'swiper/modules'
 import s from './pages.module.scss'
+import ScrollToTop from '../components/utils/ScrollToTop/ScrollToTop'
 
 const Home = () => {
 	const {
@@ -38,12 +39,13 @@ const Home = () => {
 	useEffect(() => {
 		getGoods()
 	}, [getGoods])
-	
+
 	if (loading) return <h1 className='LOADING'>Loading...</h1>
 	if (error) return <h1 className='ERROR'>Error: {error}</h1>
 
 	return (
 		<div className={s.home}>
+			<ScrollToTop />
 			<div className='container'>
 				<div className={s.goods}>
 					<SectionTitle text='Products' />
@@ -106,7 +108,9 @@ const Home = () => {
 							<button onClick={() => filterByCategory('mens-watches')}>
 								mens-watches
 							</button>
-							<button onClick={resetFilter}>RESET</button>
+							<button className={s.filters_reset} onClick={resetFilter}>
+								RESET
+							</button>
 						</div>
 					</div>
 					<div className={s.goods__list}>
@@ -160,7 +164,6 @@ const Home = () => {
 									<p>{item.description}</p>
 									<div className={s.goods__list_card_item}>
 										<div className={s.goods__list_card_item_desc}>
-											<p>Brand: {item.brand}</p>
 											<p>Category: {item.category}</p>
 										</div>
 										<div className={s.goods__list_card_item_price}>

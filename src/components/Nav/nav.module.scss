@@ -6,9 +6,7 @@
 	right: 0;
 	left: 0;
 	top: 0;
-	overflow: hidden;
-		overflow-x: scroll;
-	
+
 	& .container {
 		max-width: 1250px;
 		width: 100%;
@@ -25,7 +23,6 @@
 		h1 {
 			font-size: clamp(1rem, 1.5vw, 2rem);
 		}
-		
 
 		&_list {
 			display: flex;

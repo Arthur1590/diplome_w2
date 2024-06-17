@@ -50,15 +50,17 @@ export const useStore = create<IGoods>((set, get) => ({
 	getGoods: async () => {
 		set({ loading: true, error: null })
 		try {
-			const res = await fetch('https://dummyjson.com/products?limit=200')
+			const res = await fetch(`https://dummyjson.com/products?limit=200`)
 			const data = await res.json()
 			set({
 				originalGoods: data.products,
 				goods: data.products,
 				loading: false,
 			})
-			const categories = [...new Set(data.products.map((item: any) => item.category))];
-      console.log('Полученные категории:', categories);
+			const categories = [
+				...new Set(data.products.map((item: any) => item.category)),
+			]
+			console.log('Полученные категории:', categories)
 		} catch (error: any) {
 			set({ error: error.message, loading: false })
 		}

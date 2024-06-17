@@ -14,16 +14,6 @@ const Nav = () => {
 								Home
 							</Link>
 						</li>
-						<li className={s.header__nav_list_item}>
-							<Link to='/about' className={s.header__nav_list_link}>
-								About
-							</Link>
-						</li>
-						<li className={s.header__nav_list_item}>
-							<Link to='/contacts' className={s.header__nav_list_link}>
-								Contacts
-							</Link>
-						</li>
 					</ul>
 				</nav>
 			</div>
