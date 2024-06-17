@@ -19,6 +19,7 @@ const Home = () => {
 		sortbyRate,
 		setCurrentPage,
 		filterByCategory,
+		incStock,
 		resetFilter,
 		currentPage,
 		goodsPerPage,
@@ -26,15 +27,17 @@ const Home = () => {
 		loading,
 		error,
 	} = useStore()
-	// ? filters
 
-	// ?
+	// ? pagination => currPage
+	const totalPages = Math.ceil(goods.length / goodsPerPage)
 	const indexOfLastGood = currentPage * goodsPerPage
 	const indexOfFirstGood = indexOfLastGood - goodsPerPage
 	const currentGoods = goods.slice(indexOfFirstGood, indexOfLastGood)
+	// ?
 
-	// Общее количество страниц
-	const totalPages = Math.ceil(goods.length / goodsPerPage)
+	const updateStock = (id, newStock) => {
+		incStock(id, newStock)
+	}
 
 	useEffect(() => {
 		getGoods()
@@ -118,9 +121,6 @@ const Home = () => {
 							currentGoods.map(item => (
 								<div key={item.id} className={s.goods__list_card}>
 									<span className={s.goods__list_card_stock}>
-										Stock: {item.stock}
-									</span>
-									<span className={s.goods__list_card_stock}>
 										HOT {item.discountPercentage}%
 									</span>
 									<h1>{item.title}</h1>
@@ -161,10 +161,24 @@ const Home = () => {
 											/>
 										</SwiperSlide>
 									</Swiper>
-									<p>{item.description}</p>
 									<div className={s.goods__list_card_item}>
 										<div className={s.goods__list_card_item_desc}>
-											<p>Category: {item.category}</p>
+											<button
+												onClick={() => updateStock(item.id, item.stock + 1)}
+											>
+												+
+											</button>
+											<span>Stock: {item.stock}</span>
+											<button
+												onClick={() =>
+													updateStock(
+														item.id,
+														item.stock > 0 ? item.stock - 1 : 0
+													)
+												}
+											>
+												-
+											</button>
 										</div>
 										<div className={s.goods__list_card_item_price}>
 											{' '}

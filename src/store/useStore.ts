@@ -33,6 +33,7 @@ interface IGoods {
 	currentPage: number
 	goodsPerPage: number
 	getGoodById: (id: number) => Promise<IGoodsItems | undefined>
+	incStock: (id: number, newStock: number) => void
 	setCurrentPage: (page: any) => void
 	getGoods: () => Promise<void>
 	sortbyPrice: (ascending: boolean) => void
@@ -95,6 +96,12 @@ export const useStore = create<IGoods>((set, get) => ({
 	filterByCategory: category =>
 		set(state => ({
 			goods: state.originalGoods.filter(item => item.category === category),
+		})),
+	incStock: (id, newStock) =>
+		set(state => ({
+			goods: state.goods.map(item =>
+				item.id === id ? { ...item, stock: newStock } : item
+			),
 		})),
 	resetFilter: () =>
 		set(state => ({
