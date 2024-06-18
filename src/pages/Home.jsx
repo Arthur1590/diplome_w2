@@ -20,6 +20,7 @@ const Home = () => {
 		setCurrentPage,
 		filterByCategory,
 		incStock,
+		deleteItem,
 		resetFilter,
 		currentPage,
 		goodsPerPage,
@@ -37,6 +38,9 @@ const Home = () => {
 
 	const updateStock = (id, newStock) => {
 		incStock(id, newStock)
+	}
+	const deleteGodos = id => {
+		deleteItem(id)
 	}
 
 	useEffect(() => {
@@ -123,6 +127,12 @@ const Home = () => {
 									<span className={s.goods__list_card_stock}>
 										HOT {item.discountPercentage}%
 									</span>
+									<button
+										onClick={() => deleteGodos(item.id)}
+										className={s.goods__list_card_delete}
+									>
+										Delete
+									</button>
 									<h1>{item.title}</h1>
 									<Swiper
 										modules={[Navigation, A11y, EffectCoverflow]}
@@ -173,7 +183,7 @@ const Home = () => {
 												onClick={() =>
 													updateStock(
 														item.id,
-														item.stock > 0 ? item.stock - 1 : 0
+														item.stock > 0 ? item.stock - 1 : item.stock
 													)
 												}
 											>

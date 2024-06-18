@@ -34,6 +34,7 @@ interface IGoods {
 	goodsPerPage: number
 	getGoodById: (id: number) => Promise<IGoodsItems | undefined>
 	incStock: (id: number, newStock: number) => void
+	deleteItem: (id: number) => void
 	setCurrentPage: (page: any) => void
 	getGoods: () => Promise<void>
 	sortbyPrice: (ascending: boolean) => void
@@ -107,4 +108,7 @@ export const useStore = create<IGoods>((set, get) => ({
 		set(state => ({
 			goods: state.originalGoods,
 		})),
+		deleteItem: (id) => set(state => ({
+			goods: state.goods.filter(item => item.id !== id)
+		})) 
 }))
