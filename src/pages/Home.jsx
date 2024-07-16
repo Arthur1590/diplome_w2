@@ -23,16 +23,16 @@ const Home = () => {
 		deleteItem,
 		resetFilter,
 		currentPage,
-		goodsPerPage,
+		limit,
 		goods,
 		loading,
 		error,
 	} = useStore()
 
 	// ? pagination => currPage
-	const totalPages = Math.ceil(goods.length / goodsPerPage)
-	const indexOfLastGood = currentPage * goodsPerPage
-	const indexOfFirstGood = indexOfLastGood - goodsPerPage
+	const totalPages = Math.ceil(goods.length / limit)
+	const indexOfLastGood = currentPage * limit
+	const indexOfFirstGood = indexOfLastGood - limit
 	const currentGoods = goods.slice(indexOfFirstGood, indexOfLastGood)
 	// ?
 

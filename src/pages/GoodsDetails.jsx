@@ -76,7 +76,6 @@ const GoodsDetails = () => {
 						Price: {goodsItem.price}$ | Rating: {goodsItem.rating}
 					</h1>
 					<p>{goodsItem.description}</p>
-					<button>Add to Cart</button>
 					<Link to={'/'}>Get Back</Link>
 				</article>
 			</div>

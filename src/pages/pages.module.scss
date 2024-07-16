@@ -213,3 +213,61 @@
 		}
 	}
 }
+
+.add {
+	min-height: 100vh;
+
+	.container {
+		max-width: 1300px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 0 15px;
+	}
+
+	.sec__title {
+		text-align: center;
+		margin: 2rem 0;
+	}
+
+	&__menu {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 2.5rem;
+		
+		.controlls {
+			display: flex;
+			flex-flow: column wrap;
+			align-items: stretch;
+			justify-content: center;
+			gap: 1.5rem;
+			width: fit-content;
+			box-shadow: 0 0 5px #333;
+			padding: 1rem;
+			border-radius: 1.4rem;
+
+			input {
+				width: fit-content;
+				padding: 0.5rem 1.5rem;
+				font-size: clamp(1rem, 1.5vw, 1.5rem);
+				color: #000;
+				font-weight: 500;
+				border-bottom: 1px solid #000;
+
+				&::placeholder {
+					color: #000;
+				}
+			}
+			button {
+				text-align: center;
+			}
+		}
+	}
+
+	&__items {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}

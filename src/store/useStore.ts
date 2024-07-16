@@ -31,7 +31,7 @@ interface IGoods {
 	loading: boolean
 	error: null | string
 	currentPage: number
-	goodsPerPage: number
+	limit: number
 	getGoodById: (id: number) => Promise<IGoodsItems | undefined>
 	incStock: (id: number, newStock: number) => void
 	deleteItem: (id: number) => void
@@ -40,15 +40,19 @@ interface IGoods {
 	sortbyPrice: (ascending: boolean) => void
 	sortbyRate: (ascending: boolean) => void
 	filterByCategory: (category: string) => void
+	products: IGoodsItems[]
+	setProduct: (products: IGoodsItems[]) => void
+	addProduct: (product: IGoodsItems) => void
 }
 export const useStore = create<IGoods>((set, get) => ({
 	originalGoods: [],
+	products: [],
 	goods: [],
 	categories: [],
 	loading: false,
 	error: null,
 	currentPage: 1,
-	goodsPerPage: 12,
+	limit: 12,
 	getGoods: async () => {
 		set({ loading: true, error: null })
 		try {
@@ -108,7 +112,13 @@ export const useStore = create<IGoods>((set, get) => ({
 		set(state => ({
 			goods: state.originalGoods,
 		})),
-		deleteItem: (id) => set(state => ({
-			goods: state.goods.filter(item => item.id !== id)
-		})) 
+	deleteItem: id =>
+		set(state => ({
+			goods: state.goods.filter(item => item.id !== id),
+		})),
+	setProduct: products => set({ products }),
+	addProduct: product =>
+		set(state => ({
+			products: [...state.products, product],
+		})),
 }))
